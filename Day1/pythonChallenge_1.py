@@ -1,17 +1,19 @@
-__author__ = "MayDee"
+"""pythonChallenge_1.py
 
-"""
 	Shift 2 letter by alphabet and get instructions and next link.
 """
 
-def decode(text):
-	"""
-		text - text to be shifted.
 
-		Shifts text by alphabet in 2 letters right.
+__author__ = "MayDee"
+
+
+def decode(text):
+	"""Shifts text by alphabet in 2 letters right.
 	"""
+
 	dict_trans = str.maketrans('abcdefghijklmnopqrstuvwxyz', 'cdefghijklmnopqrstuvwxyzab')
 	return text.translate(dict_trans)
+
 
 if __name__ == '__main__':
 	text = "g fmnc wms bgblr rpylqjyrc gr zw fylb. rfyrq ufyr amknsrcpq ypc dmp. bmgle gr gl zw fylb gq glcddgagclr ylb rfyr'q ufw rfgq rcvr gq qm jmle. sqgle qrpgle.kyicrpylq() gq pcamkkclbcb. lmu ynnjw ml rfc spj."
