@@ -13,8 +13,6 @@ Output
 __author__ = "maydee"
 
 
-import re
-
 
 def song_decoder(song):
 	"""Return the words separated with a space not 'WUB'.
