@@ -47,6 +47,6 @@ try:
         print(line)
         row += 1
 except IndexError:
-    print("usage: bigdigits.py <number>")
+    print("usage: bigdigits_ans.py <number>")
 except ValueError as err:
     print(err, "in", digits) 
