@@ -1,3 +1,5 @@
+import sys
+
 """bigdigits_ans.py
 
     Prints the input in form of big numbers created from the input digits.
@@ -5,9 +7,6 @@
 """
 
 __author__ = "maydee"
-
-
-import sys
 
 
 Zero = ["  ***  ",
