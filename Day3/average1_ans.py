@@ -11,6 +11,7 @@ total = 0
 lowest = None
 highest = None
 count = 0
+
 while True:
     try:
         line = input("enter a number or Enter to finish: ")
@@ -26,5 +27,6 @@ while True:
             lowest = number
     except ValueError as err:
         print(err)
-print("numbers:", numbers)
-print("count =", count, "sum =", total, "lowest =", lowest, "highest =", highest, "mean =", total/count)
+if numbers:
+    print("numbers:", numbers)
+    print("count =", count, "sum =", total, "lowest =", lowest, "highest =", highest, "mean =", total/count)
