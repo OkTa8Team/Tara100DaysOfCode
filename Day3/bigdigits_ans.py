@@ -2,7 +2,6 @@
 
     Prints the input in form of big numbers created from the input digits.
     Input is provided in for of number as argument when the program is called
-    Returns big number in 7 rows created from the input digits
 """
 
 __author__ = "maydee"
