@@ -15,20 +15,23 @@ subjects = ["cat", "dog", "man", "woman"]
 verbs = ["sang", "ran", "jumped"]
 adverbs = ["loudly", "quietly", "well", "badly"]
 
-try:
-    inp = sys.argv[1]
-    if inp is None or not(0 < int(inp) <= 10):
-        amount = 5
-    else:
-        amount = inp
-    for i in range(amount):
-        article = random.choice(articles)
-        subject = random.choice(subjects)
-        verb = random.choice(verbs)
-        adverb = random.choice(adverbs)
-        if random.randint(0, 1):
-            print(article, subject, verb)
+amount = 5
+if len(sys.argv) > 1:
+    try:
+        if 0 < int(sys.argv[1]) <= 10:
+            amount = int(sys.argv[1])
         else:
-            print(article, subject, verb, adverb)
-except ValueError as err:
-    print(err)
+            print("1 <= lines <= 10")
+    except ValueError:
+        print("usage: awfulpoetry2_ans.py [amount of lines]")
+
+while amount:
+    article = random.choice(articles)
+    subject = random.choice(subjects)
+    verb = random.choice(verbs)
+    adverb = random.choice(adverbs)
+    if random.randint(0, 1):
+        print(article, subject, verb)
+    else:
+        print(article, subject, verb, adverb)
+    amount -= 1
