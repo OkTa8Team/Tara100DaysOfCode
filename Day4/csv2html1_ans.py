@@ -1,4 +1,5 @@
 import sys
+import xml.sax.saxutils
 
 """csv2html1_ans.py
 
@@ -48,10 +49,10 @@ def print_line(line, color, maxwidth):
                 field = field.title()
                 field = field.replace(" And ", " and ")
                 if len(field) <= maxwidth:
-                    field = escape_html(field)
+                    field = xml.sax.saxutils.escape(field)
                 else:
                     field = "{0} ...".format(
-                            escape_html(field[:maxwidth]))
+                        xml.sax.saxutils.escape(field[:maxwidth]))
                 print("<td>{0}</td>".format(field))
     print("</tr>")
 
