@@ -2,9 +2,9 @@ import cmath
 import math
 import sys
 
-"""print_unicode_ans.py
+"""quadratic_ans.py
 
-    Takes users input and prints into file the Unicode symbols which contain in description the inputted words.
+    Finds the roots of the quadratic equation.
 
 """
 
