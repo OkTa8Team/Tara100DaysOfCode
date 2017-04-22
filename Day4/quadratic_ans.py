@@ -48,8 +48,18 @@ else:
     x1 = (-b + root) / (2 * a)
     x2 = (-b - root) / (2 * a)
 
-equation = ("{a}x{SQUARED} + {b}x + {c} = 0 {ARROW} x = {x1}"
-            .format(**locals()))
+equation = "{0}x{1} ".format(a, SQUARED)
+if b != 0:
+    if b < 0:
+        equation += "- {0}x ".format(abs(b))
+    else:
+        equation += "+ {0}x ".format(b)
+if c != 0:
+    if c < 0:
+        equation += "- {0} ".format(abs(c))
+    else:
+        equation += "+ {0} ".format(c)
+equation += "= 0 {1} x = {0}".format(x1, ARROW)
 if x2 is not None:
     equation += " or x = {0}".format(x2)
 print(equation)
