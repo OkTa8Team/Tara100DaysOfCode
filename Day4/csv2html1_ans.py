@@ -11,7 +11,7 @@ __author__ = "maydee"
 
 
 def main():
-    maxwidth = 100
+    maxwidth, format = process_options()
     print_start()
     count = 0
     while True:
@@ -23,7 +23,7 @@ def main():
                 color = "white"
             else:
                 color = "lightyellow"
-            print_line(line, color, maxwidth)
+            print_line(line, color, maxwidth, format)
             count += 1
         except EOFError:
             break
@@ -34,8 +34,9 @@ def print_start():
     print("<table border='1'>")
 
 
-def print_line(line, color, maxwidth):
+def print_line(line, color, maxwidth, format):
     print("<tr bgcolor='{0}'>".format(color))
+    format_number = "<td align='right'>{{0:{0}}}</td>".format(format)
     fields = extract_fields(line)
     for field in fields:
         if not field:
@@ -44,7 +45,7 @@ def print_line(line, color, maxwidth):
             number = field.replace(",", "")
             try:
                 x = float(number)
-                print("<td align='right'>{0:d}</td>".format(round(x)))
+                print(format_number.format(round(x)))
             except ValueError:
                 field = field.title()
                 field = field.replace(" And ", " and ")
@@ -80,11 +81,30 @@ def extract_fields(line):
     return fields
 
 
-def escape_html(text):
-    text = text.replace("&", "&amp;")
-    text = text.replace("<", "&lt;")
-    text = text.replace(">", "&gt;")
-    return text
+def process_options():
+    maxwidth_str = 'maxwidth='
+    format_str = 'format='
+    maxwidth = 100
+    format = '.0f'
+
+    for arg in sys.argv:
+        if arg in ['-h', '-help']:
+            print("""\
+            usage:
+            csv2html.py [maxwidth=int] [format=str] < infile.csv > outfile.html
+    
+            maxwidth is an optional integer; if specified, it sets the maximum
+            number of characters that can be output for string fields,
+            otherwise a default of {0} characters is used.
+    
+            format is the format to use for numbers; if not specified it
+            defaults to "{1}".""".format(maxwidth, format))
+            return None, None
+        elif arg.startswith(maxwidth_str):
+            maxwidth = int(arg[len(maxwidth_str):])
+        elif arg.startswith(format_str):
+            format = arg[len(format_str):]
+    return maxwidth, format
 
 
 def print_end():
