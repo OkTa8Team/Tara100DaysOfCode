@@ -2,9 +2,9 @@ import sys
 import collections
 import string
 
-"""csv2html1_ans.py
+"""uniquewords_ans.py
 
-    Transform the CSV file into HTML file.
+    Count unique words in file.
 
 """
 

@@ -1,9 +1,9 @@
 import sys
 import collections
 
-"""csv2html1_ans.py
+"""external_sites_ans.py
 
-    Transform the CSV file into HTML file.
+    Get all the link which refer to another sites from the file.
 
 """
 

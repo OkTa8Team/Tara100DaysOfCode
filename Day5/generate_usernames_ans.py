@@ -1,9 +1,9 @@
 import sys
 import collections
 
-"""csv2html1_ans.py
+"""generate_usernames_ans.py
 
-    Transform the CSV file into HTML file.
+    Generate user data from the file with the base.
 
 """
 
