@@ -17,27 +17,69 @@ def menu():
 
 def choice(item_list, is_changed):
     """Searches for the filename file or asks to create new one."""
-    pass
+    while True:
+        if item_list:
+            if is_changed:
+                options = "[A]dd [D]elete [S]ave [Q]uit"
+                valid_options = "AaDdSsQq"
+            else:
+                options = "[A]dd [D]elete [Q]uit"
+                valid_options = "AaDdQq"
+        else:
+            options = "[A]dd [Q]uit"
+            valid_options = "AaQq"
+        user_choice = get_string(options, default='a')
+        if user_choice not in options:
+            print('ERROR: invalid choice--enter on of "{0}"'.format(valid_options))
+            input("Press Enter to continue...")
+        else:
+            return user_choice
 
 
 def add_element(item_list, is_changed):
     """Add an element to the list"""
-    pass
+    new_item = get_string("Add item")
+    if new_item:
+        item_list.append(new_item)
+        item_list.sort(key=str.lower)
+        return True
+    return is_changed
 
 
 def del_element(item_list, is_changed):
     """Delete an element from the list."""
-    pass
+    del_item = get_integer("Delete item number (or 0 to cancel)", maximum=len(item_list))
+    if del_item != 0:
+        del item_list[del_item-1]
+        return True
+    return is_changed
 
 
 def load_item_list(filename):
     """Load the list from the file."""
-    pass
+    item_list = []
+    file = None
+    try:
+        file = open(filename, encoding='utf-8')
+        for line in file:
+            item_list.append(line.rstrip())
+    except EnvironmentError as err:
+        print("Error! Failed to load {0}: {1}".format(filename, err))
+        return []
+    finally:
+        if file is not None:
+            file.close()
+    return item_list
 
 
 def print_list(item_list):
     """Print the list to the console."""
-    pass
+    if not item_list:
+        print("-- no items are in the list --")
+    else:
+        for index, item in enumerate(item_list):
+            print("{0}: {item}".format(index + 1, **locals()))
+    print()
 
 
 def save_item_list(filename, item_list, stop_after_save = False):
@@ -48,11 +90,11 @@ def save_item_list(filename, item_list, stop_after_save = False):
         file.write("\n".join(item_list))
         file.write("\n")
     except EnvironmentError as err:
-        print("Error! Failed to save {filename}: {err}")
+        print("ERROR! Failed to save {filename}: {err}")
     else:
-        print("Saved {0} item{1} to {2}".format(len(item_list),'s' if len(item_list) > 1 else '', filename))
+        print("Saved {0} item{1} to {2}.lst".format(len(item_list),'s' if len(item_list) > 1 else '', filename))
         if not stop_after_save:
-            print("Press Enter to continue...")
+            input("Press Enter to continue...")
     finally:
         if file is not None:
             file.close()
