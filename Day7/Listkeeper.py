@@ -8,11 +8,62 @@ import os
 
 __author__ = "maydee"
 
+YES = frozenset({'YES', 'Y', 'yes', 'y', 'Yes'})
 
 def menu():
     """Shows the menu and receives the users answer.
     """
-    pass
+    is_changed = False
+    item_list = []
+
+    filename, item_list = choose_file()
+    if not filename:
+        print("Canceled")
+        return
+
+    while True:
+        print_list(item_list)
+        user_choice = choice(item_list, is_changed)
+        if user_choice in 'Aa':
+            is_changed = add_element(item_list, is_changed)
+        elif user_choice in 'Dd':
+            is_changed = del_element(item_list, is_changed)
+        elif user_choice in 'Ss':
+            is_changed = save_item_list(filename, item_list)
+        elif user_choice in 'Qq':
+            if (is_changed and (get_string("Save unsaved changed (y/n)", "y") in YES)):
+                save_item_list(filename, item_list, True)
+            break
+
+
+def choose_file():
+    """Returns the filename and the list items."""
+    item_list = []
+    filename = None
+    new_file = False
+
+    files = [file for file in os.listdir(".") if file.endswith(".lst")]
+
+    if not files:
+        new_file = True
+    else:
+        print_list(files)
+        while True:
+            file_index = get_integer("Specify the number of the file you want or 0 to create new one", maximum=len(files))
+            if file_index in range(len(files) + 1):
+                break
+            else:
+                print("Enter the valid number, please.\n")
+        if file_index == 0:
+            new_file = True
+        else:
+            filename = files[file_index - 1]
+            item_list = load_item_list(filename)
+    if new_file:
+        filename = get_string("Choose filename")
+        if not filename.endswith(".lst"):
+            filename += ".lst"
+    return filename, item_list
 
 
 def choice(item_list, is_changed):
@@ -91,10 +142,12 @@ def save_item_list(filename, item_list, stop_after_save = False):
         file.write("\n")
     except EnvironmentError as err:
         print("ERROR! Failed to save {filename}: {err}")
+        return True
     else:
         print("Saved {0} item{1} to {2}.lst".format(len(item_list),'s' if len(item_list) > 1 else '', filename))
         if not stop_after_save:
             input("Press Enter to continue...")
+        return False
     finally:
         if file is not None:
             file.close()
