@@ -2,9 +2,9 @@ import requests
 import json
 
 
-#https://oauth.vk.com/authorize?client_id=5990267&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=messages,photos,audio&response_type=token&v=5.52
 
-token='2d74c68bffc954b3ac19c7ad4fd16a951fca64777cb9d20cc4c8ab0aa2073b69b2116866a4d66e5faea6e'
+
+token=''
 
 
 def write_json(data):
@@ -28,7 +28,7 @@ def download_photo(url):
 
 def main():
 	# Load all the photos into photos.json
-	# r = requests.get('https://api.vk.com/method/photos.get', params={'owner_id': 259475165,
+	# r = requests.get('https://api.vk.com/method/photos.get', params={'owner_id': ,
 	# 																		'album_id': 'saved',
 	# 																		'photo_sizes': True,
 	# 																		'access_token': token})
