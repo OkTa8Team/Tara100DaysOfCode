@@ -50,12 +50,14 @@ def codes_into_csv(filename, codes):
     if ".csv" not in filename:
         filename += ".csv"
     with open(filename, 'w', newline='') as csvfile:
-        spamwriter = csv.writer(csvfile, dialect='excel', delimiter=' ',
-                                quotechar='\t', quoting=csv.QUOTE_MINIMAL)
+        spamwriter = csv.writer(csvfile, dialect='excel', delimiter=',', doublequote = True,
+                                lineterminator = '\r\n', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         spamwriter.writerow(["GAME", "CODE", "EXPIRE DATE"])
         for code, code_date in codes:
-            spamwriter.writerow([code.text[:code.text.index("\n")],
-                                code.text[code.text.index("PC"):code.text.index("XB360")], code_date])
+            spamwriter.writerow([code.text.split("\n")[0], code.text.split("\n")[1],
+                                 datetime.date(datetime.date.today().year, int(code_date[:2]), int(code_date[-2:]))])
+            print([code.text.split("\n")[0], code.text.split("\n")[1],
+                   datetime.date(datetime.date.today().year, int(code_date[:2]), int(code_date[-2:]))])
 
 
 amount_of_tweets = 100
