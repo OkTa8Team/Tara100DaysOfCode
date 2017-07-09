@@ -53,3 +53,9 @@
 **Progress**: Working with twitter api.
 
 **Link to work:** [Code + 8](https://github.com/OkTa8Team/TaraDaysOfCode/tree/master/Code%20%2B%208)
+
+### Code +9 July 9, 2017
+
+**Progress**: argparse lib, os.psth lib and locale in order to see the custom dir/ls command in console/terminal
+
+**Link to work:** [Code + 9](https://github.com/OkTa8Team/TaraDaysOfCode/tree/master/Code%20%2B%209)
