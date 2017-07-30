@@ -156,7 +156,40 @@ class Point:
         Point(3, 2)
         """
         return Point(self.x / other.x, self.y / other.y)
-        
+
+    def __itruedev__(self, other):
+        """Divides the coordinates of the other and returns self.
+
+        >>> point = Point(3, 3)
+        >>> point /= Point(1, 2)
+        >>> point
+        Point(3, 1.5)
+        """
+        self.x /= other.x
+        self.y /= other.y
+        return self
+
+    def __floordiv__(self, other):
+        """Returns new Point where the coordinates are the
+            floor division of the given ones.
+
+        >>> point = Point(3, 3) // Point(1, 2)
+        >>> point
+        Point(3, 1)
+        """
+        return Point(self.x // other.x, self.y // other.y)
+
+    def __ifloordev__(self, other):
+        """Divides the coordinates of the other and returns self.
+
+        >>> point = Point(3, 3)
+        >>> point //= Point(1, 2)
+        >>> point
+        Point(3, 1)
+        """
+        self.x //= other.x
+        self.y //= other.y
+        return self
 
 
 class Circle(Point):
