@@ -81,6 +81,83 @@ class Point:
     def __str__(self):
         return "({0.x!r}, {0.y!r})".format(self)
 
+    def __add__(self, other):
+        """Returns new Point where the coordinates are the 
+            sum of the given ones.
+
+        >>> point = Point(3, 4) + Point(1, 2)
+        >>> point
+        Point(4, 6)
+        """
+        return Point(self.x + other.x, self.y + other.y)
+
+    def __iadd__(self, other):
+        """Adds the coordinates of the other and returns self.
+
+        >>> point = Point(1, 2)
+        >>> point += Point(3, 4)
+        >>> point
+        Point(4, 6)
+        """
+        self.x += other.x
+        self.y += other.y
+        return self
+
+    def __sub__(self, other):
+        """Returns new Point where the coordinates are the 
+            difference of the given ones.
+
+        >>> point = Point(3, 4) - Point(1, 2)
+        >>> point
+        Point(2, 2)
+        """
+        return Point(self.x - other.x, self.y - other.y)
+
+    def __isub(self, other):
+        """Subtracts the coordinates of the other and returns self.
+
+        >>> point = Point(3, 4)
+        >>> point += Point(1, 2)
+        >>> point
+        Point(2, 2)
+        """
+        self.x -= other.x
+        self.y -= other.y
+        return self
+
+    def __mul__(self, other):
+        """Returns new Point where the coordinates are the 
+            multiplication of the given ones.
+
+        >>> point = Point(3, 4) * Point(1, 2)
+        >>> point
+        Point(3, 8)
+        """
+        return Point(self.x * other.x, self.y * other.y)
+
+    def __imul__(self, other):
+        """Multiplies the coordinates of the other and returns self.
+
+        >>> point = Point(3, 4)
+        >>> point *= Point(1, 2)
+        >>> point
+        Point(3, 8)
+        """
+        self.x *= other.x
+        self.y *= other.y
+        return self
+
+    def __truediv__(self, other):
+        """Returns new Point where the coordinates are the 
+            division of the given ones.
+
+        >>> point = Point(3, 4) / Point(1, 2)
+        >>> point
+        Point(3, 2)
+        """
+        return Point(self.x / other.x, self.y / other.y)
+        
+
 
 class Circle(Point):
 
